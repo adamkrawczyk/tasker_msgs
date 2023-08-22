@@ -1,23 +1,25 @@
 <?xml version="1.0"?>
-<package format="2">
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
   <name>tasker_msgs</name>
   <version>0.1.0</version>
   <description>The tasker_msgs package</description>
-
-  <maintainer email="you@yourdomain.tld">Your Name</maintainer>
   <license>BSD</license>
-  <url type="website">http://wiki.ros.org/beginner_tutorials</url>
+  <maintainer email="adam-krawczyk@outlook.com">Adam Krawczyk</maintainer>
   <author email="you@yourdomain.tld">Wojciech Dudek</author>
+  <url type="website">http://wiki.ros.org/beginner_tutorials</url>
 
-  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <build_depend>rospy</build_depend>
+  <build_depend>rosidl_default_generators</build_depend>
   <build_depend>std_msgs</build_depend>
   <build_depend>geometry_msgs</build_depend>
-  <exec_depend>message_runtime</exec_depend>
-  <exec_depend>rospy</exec_depend>
+
+  <exec_depend>rosidl_default_runtime</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
 
-</package>
+  <!-- Export tag indicating this package is part of the rosidl_interface_packages group -->
+  <member_of_group>rosidl_interface_packages</member_of_group>
 
+</package>

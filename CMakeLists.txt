@@ -1,53 +1,41 @@
-cmake_minimum_required(VERSION 2.8.3)
-
+cmake_minimum_required(VERSION 3.8)
 project(tasker_msgs)
 
-# Get the information about this package's buildtime dependencies
-  find_package(catkin REQUIRED
-    COMPONENTS message_generation std_msgs geometry_msgs rospy)
+# Find required packages
+find_package(ament_cmake REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
-  # Declare the message files to be built
-  add_message_files(FILES
-    TaskState.msg
-    ScheduleParams.msg
-    Status.msg
-    RobotResource.msg
-    ShdlData.msg
-    ShdlDataStamped.msg
-    CMD.msg
-  #  MyMessage2.msg
-  )
+# Add message and service files
+set(msg_files
+  "msg/TaskState.msg"
+  "msg/ScheduleParams.msg"
+  "msg/Status.msg"
+  "msg/RobotResource.msg"
+  "msg/ShdlData.msg"
+  "msg/ShdlDataStamped.msg"
+  "msg/CMD.msg"
+)
 
+set(srv_files
+  "srv/TaskRequest.srv"
+  "srv/LaunchConditions.srv"
+  "srv/StartTask.srv"
+  "srv/HoldConditions.srv"
+  "srv/SchedulingConditions.srv"
+  "srv/SuspendConditions.srv"
+  "srv/CostConditions.srv"
+)
 
-  # Declare the service files to be built
-  add_service_files(FILES
-    TaskRequest.srv
-    LaunchConditions.srv
-    StartTask.srv
-    HoldConditions.srv
-    SchedulingConditions.srv
-    SuspendConditions.srv
-    CostConditions.srv
-  )
+# Generate messages and services
+rosidl_generate_interfaces(${PROJECT_NAME}
+  ${msg_files}
+  ${srv_files}
+  DEPENDENCIES std_msgs geometry_msgs
+)
 
+# Create an ament index resource which references the libraries in the binary dir
+ament_export_dependencies(rosidl_default_runtime)
 
-
-  # Actually generate the language-specific message and service files
-  generate_messages(DEPENDENCIES std_msgs geometry_msgs)
-
-# Catkin package  
-  catkin_package(
-   INCLUDE_DIRS 
-   CATKIN_DEPENDS rospy
-   DEPENDS )
-
-
-
-  # define executable using MyMessage1 etc.
-  #add_executable(message_program src/main.cpp)
-  #add_dependencies(message_program ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-  # define executable not using any messages/services provided by this package
-  #add_executable(does_not_use_local_messages_program src/main.cpp)
-  #add_dependencies(does_not_use_local_messages_program ${catkin_EXPORTED_TARGETS})
-
+ament_package()

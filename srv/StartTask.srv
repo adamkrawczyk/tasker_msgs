@@ -1,3 +1,3 @@
-bool isInterrupting
+bool is_interrupting  # todo(adkrawcz): remove from code "isInterrupting"
 string params
 ---
